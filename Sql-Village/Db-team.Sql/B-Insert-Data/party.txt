@@ -1,0 +1,150 @@
+drop view ViewActivityPersons
+go
+create view ViewActivityPersons as
+select a.PartyId,count(a.PartyId) TotalPersons,AVG(YEAR(GETDATE()) - YEAR(b.Birthday)) as AvgOlds
+from Activity a,Member b
+where a.UserId = b.UserId
+group by a.PartyId
+go
+
+drop view ViewActivityMen
+go
+create view ViewActivityMen as
+select a.PartyId,count(a.PartyId) TotalMen,AVG(YEAR(GETDATE()) - YEAR(b.Birthday)) as AvgMenOlds
+from Activity a,Member b
+where a.UserId = b.UserId and b.sex=1
+group by a.PartyId
+go
+
+drop view ViewActivityWomen
+go
+create view ViewActivityWomen as
+select a.PartyId,count(a.PartyId) TotalWomen,AVG(YEAR(GETDATE()) - YEAR(b.Birthday)) as AvgWomenOlds
+from Activity a,Member b
+where a.UserId = b.UserId and b.sex=2
+group by a.PartyId
+go
+
+drop view ViewActivityMatches
+go
+create view ViewActivityMatches as
+select a.PartyId,count(a.PartyId) TotalMatch
+from liker a ,liker b
+where a.LikerId = b.UserId and a.UserId = b.LikerId and b.PartyId = a.PartyId
+group by a.PartyId
+go
+
+drop view ViewActivitySummary
+go
+create view ViewActivitySummary as
+select a.PartyId,a.PartyName,a.PartyDate,a.Restaurant,
+b.TotalPersons,b.AvgOlds,
+c.TotalMen,c.AvgMenOlds,
+d.TotalWomen,d.AvgWomenOlds,
+e.TotalMatch
+from Party a, ViewActivityPersons b,ViewActivityMen c,ViewActivityWomen d,ViewActivityMatches e
+where a.PartyId=b.PartyId and a.PartyId=c.PartyId and a.PartyId=d.PartyId and a.PartyId=e.PartyId
+go
+
+select * from ViewActivitySummary
+
+
+
+INSERT INTO [dbo].[Party] ( [PartyName], [PartyDate], [BeginTime], [EndTime], [Marry], [Persons], [ManAmt], [ManEducaton], [ManOlds1], [ManOlds2], [WomanAmt], [WomanEducaton], [WomanOlds1], [WomanOlds2], [EarlyDate], [EarlyManAmt], [EarlyWomanAmt], [PictureUrl], [Restaurant], [AddressNote], [BusNote], [Notes], [WomenAmt]) VALUES ( N'001 台北單身派對 優質未婚大專青年男女聯誼餐會', N'2018-10-06 00:00:00', N'13:30', N'17:30', 1, 50, 650, 4, 20, 32, 500, 4, 20, 35, N'2018-09-25 00:00:00', 500, 350, N'../../DSC001.jpg', N'台北市喜來登飯店華美廳', N'台北市忠孝西路一段100號3F', N'台北車站附近', N'本次活動男限500大企業及軍公教人員', 0)
+INSERT INTO [dbo].[Party] ( [PartyName], [PartyDate], [BeginTime], [EndTime], [Marry], [Persons], [ManAmt], [ManEducaton], [ManOlds1], [ManOlds2], [WomanAmt], [WomanEducaton], [WomanOlds1], [WomanOlds2], [EarlyDate], [EarlyManAmt], [EarlyWomanAmt], [PictureUrl], [Restaurant], [AddressNote], [BusNote], [Notes], [WomenAmt]) VALUES ( N'002 台北單身派對 優質未婚大專青年男女聯誼餐會', N'2018-10-07 00:00:00', N'13:30', N'17:30', 1, 50, 650, 4, 20, 32, 500, 4, 20, 35, N'2018-09-25 00:00:00', 500, 350, N'../../DSC002.jpg', N'台北市喜來登飯店華美廳', N'台北市忠孝西路一段100號3F', N'台北車站附近', N'本次活動男限500大企業及軍公教人員', 0)
+INSERT INTO [dbo].[Party] ( [PartyName], [PartyDate], [BeginTime], [EndTime], [Marry], [Persons], [ManAmt], [ManEducaton], [ManOlds1], [ManOlds2], [WomanAmt], [WomanEducaton], [WomanOlds1], [WomanOlds2], [EarlyDate], [EarlyManAmt], [EarlyWomanAmt], [PictureUrl], [Restaurant], [AddressNote], [BusNote], [Notes], [WomenAmt]) VALUES ( N'003 台北單身派對 優質未婚大專青年男女聯誼餐會', N'2018-10-10 00:00:00', N'13:30', N'17:30', 1, 50, 650, 4, 20, 32, 500, 4, 20, 35, N'2018-09-25 00:00:00', 500, 350, N'../../DSC003.jpg', N'台北市喜來登飯店華美廳', N'台北市忠孝西路一段100號3F', N'台北車站附近', N'本次活動男限500大企業及軍公教人員', 0)
+INSERT INTO [dbo].[Party] ( [PartyName], [PartyDate], [BeginTime], [EndTime], [Marry], [Persons], [ManAmt], [ManEducaton], [ManOlds1], [ManOlds2], [WomanAmt], [WomanEducaton], [WomanOlds1], [WomanOlds2], [EarlyDate], [EarlyManAmt], [EarlyWomanAmt], [PictureUrl], [Restaurant], [AddressNote], [BusNote], [Notes], [WomenAmt]) VALUES ( N'004 台北單身派對 優質未婚大專青年男女聯誼餐會', N'2018-10-21 00:00:00', N'13:30', N'17:30', 1, 50, 650, 4, 20, 32, 500, 4, 20, 35, N'2018-09-25 00:00:00', 500, 350, N'../../DSC004.jpg', N'台北市喜來登飯店華美廳', N'台北市忠孝西路一段100號3F', N'台北車站附近', N'本次活動男限500大企業及軍公教人員', 0)
+INSERT INTO [dbo].[Party] ( [PartyName], [PartyDate], [BeginTime], [EndTime], [Marry], [Persons], [ManAmt], [ManEducaton], [ManOlds1], [ManOlds2], [WomanAmt], [WomanEducaton], [WomanOlds1], [WomanOlds2], [EarlyDate], [EarlyManAmt], [EarlyWomanAmt], [PictureUrl], [Restaurant], [AddressNote], [BusNote], [Notes], [WomenAmt]) VALUES ( N'005 台北單身派對 優質未婚大專青年男女聯誼餐會', N'2018-11-03 00:00:00', N'13:30', N'17:30', 1, 50, 650, 4, 20, 32, 500, 4, 20, 35, N'2018-09-25 00:00:00', 500, 350, N'../../DSC005.jpg', N'台北市喜來登飯店華美廳', N'台北市忠孝西路一段100號3F', N'台北車站附近', N'本次活動男限500大企業及軍公教人員', 0)
+INSERT INTO [dbo].[Party] ( [PartyName], [PartyDate], [BeginTime], [EndTime], [Marry], [Persons], [ManAmt], [ManEducaton], [ManOlds1], [ManOlds2], [WomanAmt], [WomanEducaton], [WomanOlds1], [WomanOlds2], [EarlyDate], [EarlyManAmt], [EarlyWomanAmt], [PictureUrl], [Restaurant], [AddressNote], [BusNote], [Notes], [WomenAmt]) VALUES ( N'006 台北單身派對 優質未婚大專青年男女聯誼餐會', N'2018-11-17 00:00:00', N'13:30', N'17:30', 1, 50, 650, 4, 20, 32, 500, 4, 20, 35, N'2018-09-25 00:00:00', 500, 350, N'../../DSC006.jpg', N'台北市喜來登飯店華美廳', N'台北市忠孝西路一段100號3F', N'台北車站附近', N'本次活動男限500大企業及軍公教人員', 0)
+INSERT INTO [dbo].[Party] ( [PartyName], [PartyDate], [BeginTime], [EndTime], [Marry], [Persons], [ManAmt], [ManEducaton], [ManOlds1], [ManOlds2], [WomanAmt], [WomanEducaton], [WomanOlds1], [WomanOlds2], [EarlyDate], [EarlyManAmt], [EarlyWomanAmt], [PictureUrl], [Restaurant], [AddressNote], [BusNote], [Notes], [WomenAmt]) VALUES ( N'007 台北單身派對 優質未婚大專青年男女聯誼餐會', N'2018-12-11 00:00:00', N'13:30', N'17:30', 1, 50, 650, 4, 20, 32, 500, 4, 20, 35, N'2018-09-25 00:00:00', 500, 350, N'../../DSC007.jpg', N'台北市喜來登飯店華美廳', N'台北市忠孝西路一段100號3F', N'台北車站附近', N'本次活動男限500大企業及軍公教人員', 0)
+INSERT INTO [dbo].[Party] ( [PartyName], [PartyDate], [BeginTime], [EndTime], [Marry], [Persons], [ManAmt], [ManEducaton], [ManOlds1], [ManOlds2], [WomanAmt], [WomanEducaton], [WomanOlds1], [WomanOlds2], [EarlyDate], [EarlyManAmt], [EarlyWomanAmt], [PictureUrl], [Restaurant], [AddressNote], [BusNote], [Notes], [WomenAmt]) VALUES ( N'008 台北單身派對 優質未婚大專青年男女聯誼餐會', N'2018-12-15 00:00:00', N'13:30', N'17:30', 1, 50, 650, 4, 20, 32, 500, 4, 20, 35, N'2018-09-25 00:00:00', 500, 350, N'../../DSC008.jpg', N'台北市喜來登飯店華美廳', N'台北市忠孝西路一段100號3F', N'台北車站附近', N'本次活動男限500大企業及軍公教人員', 0)
+INSERT INTO [dbo].[Party] ( [PartyName], [PartyDate], [BeginTime], [EndTime], [Marry], [Persons], [ManAmt], [ManEducaton], [ManOlds1], [ManOlds2], [WomanAmt], [WomanEducaton], [WomanOlds1], [WomanOlds2], [EarlyDate], [EarlyManAmt], [EarlyWomanAmt], [PictureUrl], [Restaurant], [AddressNote], [BusNote], [Notes], [WomenAmt]) VALUES ( N'009 台北單身派對 優質未婚大專青年男女聯誼餐會', N'2018-12-25 00:00:00', N'13:30', N'17:30', 1, 50, 650, 4, 20, 32, 500, 4, 20, 35, N'2018-09-25 00:00:00', 500, 350, N'../../DSC009.jpg', N'台北市喜來登飯店華美廳', N'台北市忠孝西路一段100號3F', N'台北車站附近', N'本次活動男限500大企業及軍公教人員', 0)
+INSERT INTO [dbo].[Party] ( [PartyName], [PartyDate], [BeginTime], [EndTime], [Marry], [Persons], [ManAmt], [ManEducaton], [ManOlds1], [ManOlds2], [WomanAmt], [WomanEducaton], [WomanOlds1], [WomanOlds2], [EarlyDate], [EarlyManAmt], [EarlyWomanAmt], [PictureUrl], [Restaurant], [AddressNote], [BusNote], [Notes], [WomenAmt]) VALUES ( N'010 台北單身派對 優質未婚大專青年男女聯誼餐會', N'2018-12-29 00:00:00', N'13:30', N'17:30', 1, 50, 650, 4, 20, 32, 500, 4, 20, 35, N'2018-09-25 00:00:00', 500, 350, N'../../DSC010.jpg', N'台北市喜來登飯店華美廳', N'台北市忠孝西路一段100號3F', N'台北車站附近', N'本次活動男限500大企業及軍公教人員', 0)
+INSERT INTO [dbo].[Party] ( [PartyName], [PartyDate], [BeginTime], [EndTime], [Marry], [Persons], [ManAmt], [ManEducaton], [ManOlds1], [ManOlds2], [WomanAmt], [WomanEducaton], [WomanOlds1], [WomanOlds2], [EarlyDate], [EarlyManAmt], [EarlyWomanAmt], [PictureUrl], [Restaurant], [AddressNote], [BusNote], [Notes], [WomenAmt]) VALUES ( N'011 台北單身派對 優質未婚大專青年男女聯誼餐會', N'2019-01-01 00:00:00', N'13:30', N'17:30', 1, 50, 650, 4, 20, 32, 500, 4, 20, 35, N'2018-09-25 00:00:00', 500, 350, N'../../DSC011.jpg', N'台北市喜來登飯店華美廳', N'台北市忠孝西路一段100號3F', N'台北車站附近', N'本次活動男限500大企業及軍公教人員', 0)
+INSERT INTO [dbo].[Party] ( [PartyName], [PartyDate], [BeginTime], [EndTime], [Marry], [Persons], [ManAmt], [ManEducaton], [ManOlds1], [ManOlds2], [WomanAmt], [WomanEducaton], [WomanOlds1], [WomanOlds2], [EarlyDate], [EarlyManAmt], [EarlyWomanAmt], [PictureUrl], [Restaurant], [AddressNote], [BusNote], [Notes], [WomenAmt]) VALUES ( N'001 台北單身派對 優質未婚大專青年男女聯誼餐會', N'2019-01-05 00:00:00', N'14:00', N'17:00', 1, 50, 650, 4, 20, 32, 500, 4, 20, 35, N'2018-09-25 00:00:00', 500, 350, N'../../DSC001.jpg', N'台北市喜來登飯店華美廳', N'台北市忠孝西路一段100號3F', N'台北車站附近', N'本次活動男限500大企業及軍公教人員', 0)
+INSERT INTO [dbo].[Party] ( [PartyName], [PartyDate], [BeginTime], [EndTime], [Marry], [Persons], [ManAmt], [ManEducaton], [ManOlds1], [ManOlds2], [WomanAmt], [WomanEducaton], [WomanOlds1], [WomanOlds2], [EarlyDate], [EarlyManAmt], [EarlyWomanAmt], [PictureUrl], [Restaurant], [AddressNote], [BusNote], [Notes], [WomenAmt]) VALUES ( N'001 台北單身派對 優質未婚大專青年男女聯誼餐會', N'2019-01-19 16:00:00', N'13:30', N'17:30', 1, 50, 650, 4, 20, 32, 500, 4, 20, 35, N'2018-09-19 16:00:00', 500, 350, N'../../DSC001.jpg', N'台北市喜來登飯店華美廳', N'台北市忠孝西路一段100號3F', N'台北車站附近', N'本次活動男限500大企業及軍公教人員', 0)
+
+
+
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 1, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 102, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 103, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 104, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 105, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 106, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 107, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 108, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 109, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 110, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 111, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 112, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 113, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 114, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 115, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 116, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 117, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 118, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 119, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 120, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 121, '20181001',500, 0, 0, 0)
+
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 6, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 7, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 8, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 9, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 10, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 11, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 12, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 13, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 14, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 15, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 16, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 17, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 18, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 19, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 20, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 1 , 21, '20181001',500, 0, 0, 0)
+
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 1, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 131, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 132, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 133, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 134, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 135, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 136, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 137, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 138, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 139, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 140, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 141, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 142, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 143, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 144, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 145, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 146, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 147, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 148, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 149, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 150, '20181001',500, 0, 0, 0)
+
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 2, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 20, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 21, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 22, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 23, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 24, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 25, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 26, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 27, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 28, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 29, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 30, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 31, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 32, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 33, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 34, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 35, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 36, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 37, '20181001',500, 0, 0, 0)
+INSERT INTO Activity (PartyId, UserId, ApplyDate,actAmt, iswaiting, myNo, CheckOver) values( 2 , 38, '20181001',500, 0, 0, 0)
+

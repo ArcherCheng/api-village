@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>里長競選官網</title>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#e63946">
+
+<style>
+body{margin:0;font-family:"Microsoft JhengHei";background:#f5f7fa}
+header{background:linear-gradient(135deg,#e63946,#ff6b6b);color:white;text-align:center;padding:50px 20px}
+header img{width:130px;height:130px;border-radius:50%;border:4px solid white}
+.slogan{font-size:20px;margin-top:10px}
+.cta{margin-top:20px}
+.cta a{background:white;color:#e63946;padding:12px 25px;border-radius:30px;text-decoration:none;font-weight:bold}
+section{max-width:1000px;margin:20px auto;background:white;padding:20px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1)}
+h2{border-left:5px solid #e63946;padding-left:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+.card{padding:15px;border-radius:10px;background:#fff5f5}
+.highlight{background:#e63946;color:white;padding:20px;border-radius:12px;text-align:center;font-size:18px}
+.carousel{position:relative;overflow:hidden;border-radius:10px}
+.slides{display:flex;transition:0.5s}
+.slides img{width:100%}
+.controls{position:absolute;top:50%;width:100%;display:flex;justify-content:space-between}
+.controls button{background:rgba(0,0,0,0.5);color:white;border:none;padding:10px}
+form input,form textarea{width:100%;padding:10px;margin:8px 0;border-radius:8px;border:1px solid #ccc}
+form button{background:#e63946;color:white;padding:10px 20px;border:none;border-radius:20px}
+footer{text-align:center;background:#333;color:white;padding:15px}
+</style>
+</head>
+<body>
+
+<header>
+<img src="https://via.placeholder.com/150">
+<h1>王小明 里長候選人</h1>
+<p class="slogan">改變，從這個里開始</p>
+<div class="cta">
+<a href="#contact">立即支持</a>
+</div>
+</header>
+
+<section class="highlight">
+🔥 乾淨、安全、有溫度的社區，是我們共同的未來
+</section>
+
+<section>
+<h2>候選人介紹</h2>
+<p>深耕地方多年，了解每一位里民的需求，用行動改變社區。</p>
+</section>
+
+<section>
+<h2>學經歷</h2>
+<ul>
+<li>國立XX大學 公共行政學系</li>
+<li>現任里長</li>
+<li>社區發展協會理事長</li>
+</ul>
+</section>
+
+<section>
+<h2>政見主張</h2>
+<div class="grid">
+<div class="card">✔ 強化治安監控</div>
+<div class="card">✔ 推動長者照護</div>
+<div class="card">✔ 提升環境品質</div>
+<div class="card">✔ 爭取建設資源</div>
+</div>
+</section>
+
+<section>
+<h2>活動紀錄</h2>
+<div class="carousel">
+<div class="slides" id="slides">
+<img src="https://picsum.photos/800/400?1">
+<img src="https://picsum.photos/800/400?2">
+<img src="https://picsum.photos/800/400?3">
+</div>
+<div class="controls">
+<button onclick="prev()">❮</button>
+<button onclick="next()">❯</button>
+</div>
+</div>
+</section>
+
+<section id="contact">
+<h2>我要支持 / 聯絡</h2>
+<form onsubmit="submitForm(event)">
+<input type="text" placeholder="姓名" required>
+<input type="tel" placeholder="電話">
+<textarea placeholder="想對候選人說的話"></textarea>
+<button type="submit">送出支持</button>
+</form>
+</section>
+
+<footer>© 2026 王小明競選團隊</footer>
+
+<script>
+let index=0;const slides=document.getElementById('slides');const total=slides.children.length;
+function show(){slides.style.transform=`translateX(-${index*100}%)`}
+function next(){index=(index+1)%total;show()}
+function prev(){index=(index-1+total)%total;show()}
+setInterval(next,3000);
+
+function submitForm(e){
+ e.preventDefault();
+
+ const name = document.querySelector('input[type="text"]').value;
+ const phone = document.querySelector('input[type="tel"]').value;
+ const msg = document.querySelector('textarea').value;
+
+ // 👉 串接 Google Form（請替換成你的表單網址）
+ const url = "https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse";
+
+ const formData = new FormData();
+ formData.append("entry.1111111111", name);
+ formData.append("entry.2222222222", phone);
+ formData.append("entry.3333333333", msg);
+
+ fetch(url, {
+   method: "POST",
+   mode: "no-cors",
+   body: formData
+ });
+
+ alert('✅ 已送出支持！感謝您 🙏');
+}
+
+// LINE 加好友（請替換你的LINE連結）
+function addLine(){
+ window.open('https://line.me/R/ti/p/YOUR_LINE_ID');
+}
+
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+//新增 migrations 建立 db 及 table
+Add-Migration createDb
+
+//執行上述產生的指令
+update-database
+
+//undo this action
+Remove-migrations

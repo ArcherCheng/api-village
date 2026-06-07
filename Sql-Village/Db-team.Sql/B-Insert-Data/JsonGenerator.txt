@@ -1,0 +1,263 @@
+
+https://www.json-generator.com/#
+https://next.json-generator.com/
+
+PartyData:
+[
+  '{{repeat(100)}}',
+  {
+    partyName: '{{random("年輕族未婚男女聯誼派對","適婚族未婚男女聯誼派對","晚婚族未婚男女聯誼派對","二春及晚婚族男女聯誼派對")}}',
+    partyDate: '{{date(new Date(2021,0,2), new Date(2021,0, 3), "YYYY/MM/dd")}}',
+    beginTime: '{{random(10,14)}}',
+    endTime: function(tags){return this.beginTime + 2;},
+    marry: '1',
+    boyAmt: 700,
+    boySchoolLevel: '4',
+    boyAge1:'{{random(25,30,35,40)}}',
+    boyAge2: function(tags){return this.boyAge1 + 12;},
+    boyPersons: 30,
+    girlAmt: 500,
+    girlSchoolLevel: '4',
+    girlAge1: function(tags){return this.boyAge1 - 5;},
+    girlAge2: function(tags){return this.boyAge2 - 5;},
+    girlPersons: 30,
+    twoGirlsAmt: 300,
+    PictureUrl: 'Resources/Image/'+'{{random("P001.png","P002.png","P003.png","P004.png","P005.png","P006.png","P007.png","P008.png","P009.png","P010.png","P011.png","P012.png",)}}',
+    Restaurant: '行前三天公佈'
+  }
+]
+
+-- delete from partyData
+-- truncate table partyData
+--修改活動日期
+update PartyData set PartyDate = DATEADD(day,partyId * 3,'2021/1/1')
+update PartyData set EarlyDate = DATEADD(day, -15 , PartyDate)
+update PartyData set EarlyBoyAmt = BoyAmt - 200, EarlyGirlAmt = GirlAmt - 200, TwoGirlsAmt = GirlAmt - 250
+update PartyData set MaxVote = 5
+update PartyData set MaxVote = 5
+update PartyData set BeginTime=BeginTime+':00',EndTime=EndTime+':00'
+
+--修改活動年齡
+update PartyData set BoyAge1 = 25,BoyAge2=37,GirlAge1=22,GirlAge2=35 where SUBSTRING(PartyName,1,2) = '年輕';
+update PartyData set BoyAge1 = 30,BoyAge2=42,GirlAge1=27,GirlAge2=40 where SUBSTRING(PartyName,1,2) = '適婚';
+update PartyData set BoyAge1 = 35,BoyAge2=47,GirlAge1=32,GirlAge2=45 where SUBSTRING(PartyName,1,2) = '晚婚';
+update PartyData set BoyAge1 = 25,BoyAge2=55,GirlAge1=25,GirlAge2=50 where SUBSTRING(PartyName,1,2) = '二春';
+
+select * from PartyData
+
+
+
+AppUser:
+[
+  '{{repeat(100)}}',
+  {
+    userId: '{{index(1)}}',
+    FirstName: '{{random("趙","錢","孫","李","周","吳","鄭","王","馮","陳","褚","衛","蔣","沈","韓","楊","朱","秦","尤","許","何","呂","施","張","孔","曹","嚴","金","魏","陶","謝","鄒","章","蘇","潘","葛","彭","魯","韋","馬","苗","方","俞","袁","柳","鮑","唐","薛","雷","倪","湯","殷","羅","郝","傅","伍","顧","孟","黃","蕭","尹","姚","邵","汪","毛","狄","戴","宋","龐","熊","紀","董","梁","杜","阮","藍","江","童","郭","林","鍾","徐","邱","駱","高","夏","蔡","田","樊","胡","淩","霍","虞","柯","管","盧","柯","房","裘","丁","鄧","洪","石","崔","龔","程","陸","翁","于","段","侯")}}',
+    LastName: '{{random("家銘","俊傑","建宏","俊男","家豪","志偉","俊宏","宗翰","志宏","信宏","志強","志明","家榮","俊賢","俊豪","建良","志銘","建文","立偉","文傑","家瑋","建志","宗憲","佳宏","志遠","彥廷","智偉","志豪","明哲","嘉宏","德華","富城","家興","宗華","明弘","有才","金木","安迪","明德","文榮","文聰","弘毅","建仁","守山","守儀","志遠","自強","永南","永發","永祥","和明","明達","子豪","子嘉","子棋","子文","詩綿","正平","正文","泰山","泰銘","銘傳","銘喜","國文","國興","有木","有金","有水","有火","有土","宏文","宏柏","文安","子安","善宇","潤發","潤泰")}}',
+    NickName: '{{surname()}}',
+    Sex: '1',
+    BirthYear: '{{integer(1965,1999)}}',
+    Marry: '{{integer(1,3)}}',
+    SchoolLevel: '{{integer(3,6)}}',
+    Heights: '{{integer(160,185)}}',
+    Weights: '{{integer(50,85)}}',
+    Salary: '{{integer(50,300)}}',
+    Blood: '{{random("A","B","O","AB")}}',
+    City: '{{random("台北市","新北市","桃園市","新竹縣市","基隆市","其他")}}',
+    Star: '{{random("水瓶座","雙魚座","牡羊座","金牛座","雙子座","巨蟹座","獅子座","處女座","天秤座","天蠍座","射手座","魔羯座")}}',
+    WorkType: '{{random(	"公家機關",	"學校機關",	"軍警消機關","國營事業機關","上市櫃公司","外商公司","金融保險業","電子科技業","機械電機業","化學化工業","生物科技業","醫療保健業","百貨服務業","餐旅服務業","其他服務業","一般中小企業","醫師律師會計師","自營工作者","其他")}}',
+    Religion: '{{random("佛道教","佛教","道教","基督教","天主教","伊斯蘭教","一貫道","其他")}}',
+    LastDate: '{{date(new Date(2020,0,1), new Date(2020, 10, 30), "YYYY-MM-dd")}}',
+    LastActive: function(){return this.LastDate; },
+    Introduction: '{{lorem(1, "paragraphs")}}',
+    LikeCondition: '{{lorem(1, "paragraphs")}}',
+    UserPhoto: [
+        {
+          PhotoUrl: function(num) {
+          return 'https://randomuser.me/api/portraits/men/' + num.index(1) + '.jpg';
+        },
+        IsMain: true,
+        Descriptions: '測試用'
+      }
+    ]
+  }
+]
+
+[
+  '{{repeat(100)}}',
+  {
+    userId: '{{index(101)}}',
+    FirstName: '{{random("趙","錢","孫","李","周","吳","鄭","王","馮","陳","褚","衛","蔣","沈","韓","楊","朱","秦","尤","許","何","呂","施","張","孔","曹","嚴","金","魏","陶","謝","鄒","章","蘇","潘","葛","彭","魯","韋","馬","苗","方","俞","袁","柳","鮑","唐","薛","雷","倪","湯","殷","羅","郝","傅","伍","顧","孟","黃","蕭","尹","姚","邵","汪","毛","狄","戴","宋","龐","熊","紀","董","梁","杜","阮","藍","江","童","郭","林","鍾","徐","邱","駱","高","夏","蔡","田","樊","胡","淩","霍","虞","柯","管","盧","柯","房","裘","丁","鄧","洪","石","崔","龔","程","陸","翁","于","段","侯")}}',
+    LastName: '{{random("怡君","欣怡","雅雯","心怡","雅婷","雅惠","雅玲","靜怡","佩君","怡婷","淑芬","靜宜","怡如","佳玲","慧君","怡伶","雅芳","淑娟","淑婷","佩珊","佳慧","佳蓉","佳穎","淑惠","欣儀","嘉玲","雅慧","惠雯","玉婷","惠如","惠君","宜芳","惠婷","淑華","雅芬","慧玲","佩芬","佳樺","雅琪","淑萍","淑君","婉婷","佳琪","韻如","詩婷","芳儀","宜君","佩蓉","雅鈴","佩玲","鈺婷","雅萍","慧如","淑慧","靜儀","惠玲","淑玲","美君","怡慧","千慧","馨儀","嘉慧","美慧","美玲","筱婷","靜雯","雅君","彥廷","怡靜","玉玲","郁婷")}}',
+    NickName: '{{surname()}}',
+    Phone: '{{index(9987654200)}}',
+    Email: '{{Email([random])}}',
+    Sex: '2',
+    BirthYear: '{{integer(1970,2000)}}',
+    Marry: '{{integer(1,3)}}',
+    SchoolLevel: '{{integer(3,6)}}',
+    Heights: '{{integer(148,172)}}',
+    Weights: '{{integer(38,70)}}',
+    Salary: '{{integer(50,300)}}',
+    Blood: '{{random("A","B","O","AB")}}',
+    City: '{{random("台北市","新北市","桃園市","新竹縣市","基隆市","其他")}}',
+    Star: '{{random("水瓶座","雙魚座","牡羊座","金牛座","雙子座","巨蟹座","獅子座","處女座","天秤座","天蠍座","射手座","魔羯座")}}',
+    WorkType: '{{random(	"公家機關",	"學校機關",	"軍警消機關","國營事業機關","上市櫃公司","外商公司","金融保險業","電子科技業","機械電機業","化學化工業","生物科技業","醫療保健業","百貨服務業","餐旅服務業","其他服務業","一般中小企業","醫師律師會計師","自營工作者","其他")}}',
+    Religion: '{{random("佛道教","佛教","道教","基督教","天主教","伊斯蘭教","一貫道","其他")}}',
+    LastDate: '{{date(new Date(2020,0,1), new Date(2020, 10, 30), "YYYY-MM-dd")}}',
+    LastActive: function(){return this.LastDate; },
+    Introduction: '{{lorem(1, "paragraphs")}}',
+    LikeCondition: '{{lorem(1, "paragraphs")}}',
+    UserPhoto: [
+        {
+          PhotoUrl: function(num) {
+          return 'https://randomuser.me/api/portraits/women/' + num.index(1) + '.jpg';
+        },
+        IsMain: true,
+        Descriptions: '測試用'
+      }
+    ]
+  }
+]
+
+
+
+
+UserPhoto:
+[
+   '{{repeat(1000)}}',
+   {
+     PhotoUrl: 'https://randomuser.me/api/portraits/men/' + '{{integer(1,95)}}' + '.jpg',
+        IsMain: false,
+        Descriptions: '測試用',
+        UserId: '{{integer(1,100)}}'
+   }
+]
+[
+   '{{repeat(1000)}}',
+   {
+     PhotoUrl: 'https://randomuser.me/api/portraits/women/' + '{{integer(1,95)}}' + '.jpg',
+        IsMain: false,
+        Descriptions: '測試用',
+        UserId: '{{integer(101,200)}}'
+   }
+]
+
+update UserData set MainPhotoUrl = b.photoUrl from UserData a, UserPhoto b
+  where a.UserId = b.UserId and b.Id =
+  (select top 1 Id from UserPhoto c where c.UserId = a.UserId)
+go
+update UserPhoto set IsMain = 0
+go
+
+insert into UserPhoto(UserId,IsMain,PhotoUrl,Descriptions,WriteType,WriteUserId)
+select UserId,1,MainPhotoUrl,'Test',1,0  from UserData
+
+/*
+[
+   '{{repeat(100)}}',
+   {
+        PhotoUrl: function(num) {
+          return 'https://randomuser.me/api/portraits/men/' + num.index(1) + '.jpg';
+        },
+        IsMain: true,
+        Descriptions: '測試用',
+        UserId: '{{index(1)}}'
+   }
+]
+
+[
+   '{{repeat(100)}}',
+   {
+        PhotoUrl: function(num) {
+          return 'https://randomuser.me/api/portraits/men/' + num.index(1) + '.jpg';
+        },
+        IsMain: true,
+        Descriptions: '測試用',
+        UserId: '{{index(1)}}'
+   }
+]
+*/
+
+partyUser:
+[
+    '{{repeat(1000)}}',
+    {
+      partyId: '{{integer(1,100)}}',
+      userId: '{{integer(1,200)}}',
+      ApplyDate: '{{date(new Date(2020,5,10), new Date(2021, 5, 30), "YYYY-MM-dd")}}',
+      PartyAmt: '{{random(400,500,600)}}',
+      IsWaiting: 0
+    }
+]
+
+
+UserCondition:
+[
+  '{{repeat(100)}}',
+  {
+    userId: '{{index(1)}}',
+    marryMin: '1',
+    marryMax: '{{integer(1,3)}}',
+    schoolLevelMin: '3',
+    schoolLevelMax: '{{integer(3,6)}}',
+    HeightsMin: '{{random(148,150,152,154,156,158)}}',
+    HeightsMax: '{{random(160,162,164,166,168,170,172)}}',
+    WeightsMin: '40',
+    WeightsMax: '{{integer(45,70)}}',
+    SalaryMin: '{{random(50,60,70,80,90,100,150,200)}}',
+    bloodInclude:'{{random("A","B")}},{{random("O","AB")}}',
+    CityInclude: '{{random("台北市,新北市","台北市,新北市,基隆市","新北市,桃園市,新竹縣市","台北市,新北市,桃園市,新竹縣市,基隆市")}}'
+  }
+]
+
+UserCondition:
+[
+  '{{repeat(100)}}',
+  {
+    userId: '{{index(101)}}',
+    marryMin: '1',
+    marryMax: '{{integer(1,3)}}',
+    schoolLevelMin: '3',
+    schoolLevelMax: '{{integer(3,,6)}}',
+    HeightsMin: '{{random(158,160,162,164,166)}}',
+    HeightsMax: '{{random(166,168,170,172,175,180,185)}}',
+    WeightsMin: '55',
+    WeightsMax: '{{integer(60,85)}}',
+    SalaryMin: '{{random(50,60,70,80,90,100,150,200)}}',
+    bloodInclude:'{{random("A","B")}},{{random("O","AB")}}',
+    CityInclude: '{{random("台北市,新北市","台北市,新北市,基隆市","新北市,桃園市,新竹縣市","台北市,新北市,桃園市,新竹縣市,基隆市")}}'
+  }
+]
+
+
+
+update UserCondition set OldsMin = 2019 - DATEPART(year,b.Birthday) - 8 ,
+OldsMax = 2019 - DATEPART(year,b.Birthday)
+from UserCondition a,Member b
+where a.UserId= b.UserId and b.sex=1
+
+
+update UserCondition set OldsMin = 2019 - DATEPART(year,b.Birthday)-2  ,
+OldsMax = 2019 - DATEPART(year,b.Birthday) + 10
+from UserCondition a,Member b
+where a.UserId= b.UserId and b.sex=2
+
+
+update Member set NickName= SUBSTRING(introduction,1,3)
+update Member set JobPhotoUrl=LastName
+update Member set LastName=NickName
+
+
+[
+  '{{repeat(198)}}',
+  {
+    partyId: '2',
+    userId: '{{index(1)}}',
+    ApplyDate: '{{date(new Date(2019,0,1), new Date(2019, 3, 30), "YYYY-MM-dd")}}',
+    actAmt: '600'
+  }
+]
+
+
+

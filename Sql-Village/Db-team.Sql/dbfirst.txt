@@ -1,0 +1,5 @@
+dotnet ef dbContext scaffold "server=(local)\SqlExpress01;database=TeamModel;Trusted_Connection=True;TrustServerCertificate=true;" Microsoft.EntityFrameWorkCore.SqlServer -c "AppDbContext" -o Models -n Api.Models.Team -f --force --no-pluralize
+
+
+
+

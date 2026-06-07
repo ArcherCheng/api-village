@@ -1,0 +1,168 @@
+-- /*
+-- drop view ViewQuestionnaireAnswerCountByParty
+-- go
+-- drop view ViewQuestionnaireAnswerCountByMonth
+-- go
+-- drop view ViewQuestionnaireAnswerCountByYear
+-- go
+-- drop view ViewQuestionnaireAnswerCountByAll
+-- go
+
+-- select * from ViewQuestionnaireAnswerCountByParty
+-- go
+-- select * from ViewQuestionnaireAnswerCountByMonth
+-- go
+-- select * from ViewQuestionnaireAnswerCountByYear
+-- go
+-- select * from ViewQuestionnaireAnswerCountByAll
+-- go
+
+-- */
+-- --統計給View用
+-- drop view ViewQuestionnaireAnswerCountByParty
+-- go
+-- create view ViewQuestionnaireAnswerCountByParty As
+-- select P.PartyId,P.PartyName,Q.QuestionId , Q.QuestionDesc, A.AnswerId, A.AnswerDesc ,Count(V.Id) AnswerCount
+-- from QuestionAnswer A
+-- left join Question Q ON A.QuestionId = Q.QuestionId
+-- left outer join QuestionnaireAnswer V ON A.AnswerId = V.AnswerId
+-- left join Questionnaire B ON V.QuestionnaireId = B.QuestionnaireId
+-- left join PartyData P ON B.PartyId = P.PartyId
+-- group by P.PartyId,P.PartyName, Q.QuestionId, Q.QuestionDesc, A.AnswerId, A.AnswerDesc
+-- go
+-- -- select * from ViewQuestionnaireAnswerCountByParty
+-- go
+
+
+-- --統計給View用
+-- drop view ViewQuestionnaireAnswerCountByMonth
+-- go
+-- create view ViewQuestionnaireAnswerCountByMonth As
+-- select FORMAT(P.PartyDate,'yyyy-MM') PartyMonth,Q.QuestionId , Q.QuestionDesc, A.AnswerId, A.AnswerDesc ,Count(V.Id) AnswerCount
+-- from QuestionAnswer A
+-- left join Question Q ON A.QuestionId = Q.QuestionId
+-- left outer join QuestionnaireAnswer V ON A.AnswerId = V.AnswerId
+-- left join Questionnaire B ON V.QuestionnaireId = B.QuestionnaireId
+-- left join PartyData P ON B.PartyId = P.PartyId
+-- group by FORMAT(P.PartyDate,'yyyy-MM'), Q.QuestionId, Q.QuestionDesc, A.AnswerId, A.AnswerDesc
+-- go
+-- -- select * from ViewQuestionnaireAnswerCountByMonth
+-- go
+
+-- --統計給View用
+-- drop view ViewQuestionnaireAnswerCountByYear
+-- go
+-- create view ViewQuestionnaireAnswerCountByYear As
+-- select DatePart(YEAR,P.PartyDate) PartyYear,Q.QuestionId , Q.QuestionDesc, A.AnswerId, A.AnswerDesc ,Count(V.Id) AnswerCount
+-- from QuestionAnswer A
+-- left join Question Q ON A.QuestionId = Q.QuestionId
+-- left outer join QuestionnaireAnswer V ON A.AnswerId = V.AnswerId
+-- left join Questionnaire B ON V.QuestionnaireId = B.QuestionnaireId
+-- left join PartyData P ON B.PartyId = P.PartyId
+-- group by DatePart(YEAR,P.PartyDate), Q.QuestionId, Q.QuestionDesc, A.AnswerId, A.AnswerDesc
+-- go
+-- -- select * from ViewQuestionnaireAnswerCountByYear
+-- go
+
+
+-- drop view ViewQuestionnaireAnswerCountByAll
+-- go
+-- create view ViewQuestionnaireAnswerCountByAll As
+-- select Q.QuestionId , Q.QuestionDesc, A.AnswerId, A.AnswerDesc ,Count(V.Id) AnswerCount
+-- from QuestionAnswer A
+-- left join Question Q ON A.QuestionId = Q.QuestionId
+-- left outer join QuestionnaireAnswer V ON A.AnswerId = V.AnswerId
+-- group by Q.QuestionId , Q.QuestionDesc, A.AnswerId, A.AnswerDesc
+-- go
+-- -- select * from ViewQuestionnaireAnswerCountByAll
+-- go
+-- /*
+-- drop view ViewQuestionnaireAnswerCountByParty
+-- go
+-- drop view ViewQuestionnaireAnswerCountByMonth
+-- go
+-- drop view ViewQuestionnaireAnswerCountByYear
+-- go
+-- drop view ViewQuestionnaireAnswerCountByAll
+-- go
+
+-- select * from ViewQuestionnaireAnswerCountByParty
+-- go
+-- select * from ViewQuestionnaireAnswerCountByMonth
+-- go
+-- select * from ViewQuestionnaireAnswerCountByYear
+-- go
+-- select * from ViewQuestionnaireAnswerCountByAll
+-- go
+
+-- */
+-- --統計給View用
+-- drop view ViewQuestionnaireAnswerCountByParty
+-- go
+-- create view ViewQuestionnaireAnswerCountByParty As
+-- select P.PartyId,P.PartyName
+--     ,Q.QuestionId,Q.QuestionDesc,Q.SortOrder QuestionSortOrder
+--     ,A.AnswerId,A.AnswerDesc,A.SortOrder AnswerSortOrder
+--     ,Count(V.Id) AnswerCount
+-- from QuestionAnswer A
+-- left join Question Q ON A.QuestionId = Q.QuestionId
+-- left outer join QuestionnaireAnswer V ON A.AnswerId = V.AnswerId
+-- left join Questionnaire B ON V.QuestionnaireId = B.QuestionnaireId
+-- left join PartyData P ON B.PartyId = P.PartyId
+-- group by P.PartyId,P.PartyName, Q.QuestionId, Q.QuestionDesc,Q.SortOrder, A.AnswerId,A.SortOrder, A.AnswerDesc
+-- go
+-- -- select * from ViewQuestionnaireAnswerCountByParty
+-- go
+
+
+-- --統計給View用
+-- drop view ViewQuestionnaireAnswerCountByMonth
+-- go
+-- create view ViewQuestionnaireAnswerCountByMonth As
+-- select FORMAT(P.PartyDate,'yyyy-MM') PartyMonth
+--     ,Q.QuestionId,Q.QuestionDesc,Q.SortOrder QuestionSortOrder
+--     ,A.AnswerId,A.AnswerDesc,A.SortOrder AnswerSortOrder
+--     ,Count(V.Id) AnswerCount
+-- from QuestionAnswer A
+-- left join Question Q ON A.QuestionId = Q.QuestionId
+-- left outer join QuestionnaireAnswer V ON A.AnswerId = V.AnswerId
+-- left join Questionnaire B ON V.QuestionnaireId = B.QuestionnaireId
+-- left join PartyData P ON B.PartyId = P.PartyId
+-- group by FORMAT(P.PartyDate,'yyyy-MM'), Q.QuestionId, Q.QuestionDesc,Q.SortOrder, A.AnswerId,A.SortOrder, A.AnswerDesc
+-- go
+-- -- select * from ViewQuestionnaireAnswerCountByMonth
+-- go
+
+-- --統計給View用
+-- drop view ViewQuestionnaireAnswerCountByYear
+-- go
+-- create view ViewQuestionnaireAnswerCountByYear As
+-- select DatePart(YEAR,P.PartyDate) PartyYear
+--     ,Q.QuestionId,Q.QuestionDesc,Q.SortOrder QuestionSortOrder
+--     ,A.AnswerId,A.AnswerDesc,A.SortOrder AnswerSortOrder
+--     ,Count(V.Id) AnswerCount
+-- from QuestionAnswer A
+-- left join Question Q ON A.QuestionId = Q.QuestionId
+-- left outer join QuestionnaireAnswer V ON A.AnswerId = V.AnswerId
+-- left join Questionnaire B ON V.QuestionnaireId = B.QuestionnaireId
+-- left join PartyData P ON B.PartyId = P.PartyId
+-- group by DatePart(YEAR,P.PartyDate), Q.QuestionId, Q.QuestionDesc,Q.SortOrder, A.AnswerId,A.SortOrder, A.AnswerDesc
+-- go
+-- -- select * from ViewQuestionnaireAnswerCountByYear
+-- go
+
+
+-- drop view ViewQuestionnaireAnswerCountByAll
+-- go
+-- create view ViewQuestionnaireAnswerCountByAll As
+-- select 'All' QAll
+--     ,Q.QuestionId,Q.QuestionDesc,Q.SortOrder QuestionSortOrder
+--     ,A.AnswerId,A.AnswerDesc,A.SortOrder AnswerSortOrder
+--     ,Count(V.Id) AnswerCount
+-- from QuestionAnswer A
+-- left join Question Q ON A.QuestionId = Q.QuestionId
+-- left outer join QuestionnaireAnswer V ON A.AnswerId = V.AnswerId
+-- group by Q.QuestionId, Q.QuestionDesc,Q.SortOrder, A.AnswerId,A.SortOrder, A.AnswerDesc
+-- go
+-- -- select * from ViewQuestionnaireAnswerCountByAll
+-- go

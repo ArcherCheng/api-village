@@ -1,0 +1,36 @@
+/*
+程式部分放入如下程式即可自動記錄使用者之點擊網頁的記錄
+Public Class Actionlogattribute : System.Web.Mvc.Actionfilterattribute
+{
+        Public Override Void Onresultexecuted(Resultexecutedcontext Filtercontext)
+        {
+            Base.Onresultexecuted(Filtercontext);
+
+            If (Httpcontext.Current.User.Identity.Isauthenticated)
+            {
+                Using (Appdbcontext Db = New Appdbcontext())
+                {
+                    Aa9log20 Log = New Aa9log20()
+                    {
+                        Userid = (Httpcontext.Current.User.Identity.Isauthenticated ? Filtercontext.Httpcontext.User.Identity.Name : "Anonymous"),
+                        Refer = (Filtercontext.Httpcontext.Request.Urlreferrer == Null ? Filtercontext.Httpcontext.Request.Url.Absolutepath : Filtercontext.Httpcontext.Request.Urlreferrer.Absolutepath),
+                        //Destination = Filtercontext.Routedata.Values["Controller"] + "." + Filtercontext.Routedata.Values["Action"],
+                        Destination = Filtercontext.Httpcontext.Request.Url.Absolutepath,
+                        Querystring = Filtercontext.Httpcontext.Request.Querystring.Tostring(),
+                        Method = Filtercontext.Httpcontext.Request.Httpmethod,
+                        Ipaddress = Filtercontext.Httpcontext.Request.Userhostaddress,
+                        Requesttime = System.DateTime.Now
+                    };
+                    Db.Aa9log20.Add(Log);
+                    Db.Savechanges();
+                }
+            }
+		}
+}
+
+既然使用了mvc,那麼就直接在app_Start\Filterconfig.Cs中設定全站的套用,必經追蹤不是只有一兩個頁面會使用到
+Filters.Add(New Actionlogattribute());
+
+*/
+
+

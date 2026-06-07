@@ -1,0 +1,16 @@
+//upgrade dotnet-ef
+dotnet tool update --global dotnet-ef
+
+//generate db-first models  --use-database-names --no-pluralize
+dotnet ef dbContext scaffold "server=(local)\SqlExpress01;database=VillageModel;Trusted_Connection=True;TrustServerCertificate=true;" Microsoft.EntityFrameWorkCore.SqlServer -c "AppDbContext" -o Models -n Api.Models --force --use-database-names --no-pluralize
+
+//generate db-first models  --use-database-names --no-pluralize --no-onconfiguring
+dotnet ef dbContext scaffold "server=(local)\SqlExpress01;database=VillageModel;Trusted_Connection=True;TrustServerCertificate=true;" Microsoft.EntityFrameWorkCore.SqlServer -c "AppDbContext" -o Models -n Api.Models --force --use-database-names --no-pluralize --no-onconfiguring
+
+//generate db-first models  --use-database-names --no-pluralize --no-onconfiguring
+dotnet ef dbContext scaffold "server=(local)\SqlExpress01;database=VillageModel;Trusted_Connection=True;TrustServerCertificate=true;" Microsoft.EntityFrameWorkCore.SqlServer -c "AppDbContext" -o Models -n Api.Models --force --use-database-names --no-pluralize
+
+
+
+
+
