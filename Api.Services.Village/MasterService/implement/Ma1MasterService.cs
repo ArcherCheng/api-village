@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 namespace Api.Services;
 
 public class Ma1MasterService(ILogger<Ma1MasterService> logger, IHttpContextAccessor httpContextAccessor)
-    : ApiBaseService<Ma1MasterService>(logger, httpContextAccessor), IApiBaseService
+    : ApiBaseService<Ma1MasterService>(logger, httpContextAccessor), IMa1MasterService
 {
     public async Task<Ma1Master?> GetMa1MasterAsync(string teamId)
     {
