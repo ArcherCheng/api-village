@@ -1,0 +1,13 @@
+md Api.Helpers.Test
+cd Api.Helpers.Test
+
+//建立測試專案
+dotnet new nunit
+
+//加入測試專案的來源
+dotnet add Api.Helpers.Test.csproj reference ..\Api.Helpers\Api.Helpers.csproj
+
+// 進行測試
+dotnet test
+
+

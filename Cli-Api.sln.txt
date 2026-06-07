@@ -1,0 +1,61 @@
+md api-village
+cd api-village
+
+/* add a new solution */
+dotnet new sln -n Api.village
+
+/* add a new class library project */
+dotnet new classlib -n Api.Helpers
+dotnet new classlib -n Api.Models.Village
+dotnet new classlib -n Api.Services.Village
+dotnet new webapi -n Api.Web.Village
+
+/* add project to solution */
+dotnet solution Api.Village.slnx add Api.Web.Village\Api.Web.Village.csproj
+dotnet solution Api.Village.slnx add Api.Helpers\Api.Helpers.csproj
+dotnet solution Api.Village.slnx add Api.Models.Village\Api.Models.Village.csproj
+dotnet solution Api.Village.slnx add Api.Services.Village\Api.Services.Village.csproj
+
+dotnet solution Api.Village.slnx add Api.Helpers.Test\Api.Helpers.Test.csproj
+dotnet solution Api.Village.slnx add Api.Models.Village.Test\Api.Models.Village.Test.csproj
+dotnet solution Api.Village.slnx add Api.Services.Village.Test\Api.Services.Village.Test.csproj
+dotnet solution Api.Village.slnx add Api.Web.Village.Test\Api.Web.Village.Test.csproj
+
+
+/* dotnet new gitignore */
+dotnet new gitignore -o Api.Helpers --force
+dotnet new gitignore -o Api.Helpers.Test --force
+dotnet new gitignore -o Api.Models.Village --force
+dotnet new gitignore -o Api.Models.Village.Test --force
+dotnet new gitignore -o Api.Services.Village --force
+dotnet new gitignore -o Api.Services.Village.Test --force
+dotnet new gitignore -o Api.Web.Village --force
+dotnet new gitignore -o Api.Web.Village.Test --force
+
+/* define dotnet run version by global.json */
+dotnet new global.json -o Api.Helpers --force
+dotnet new global.json -o Api.Models.Village --force
+dotnet new global.json -o Api.Services.Village --force
+dotnet new global.json -o Api.Web.Village --force
+
+dotnet new global.json -o Api.Helpers.Tests --force
+dotnet new global.json -o Api.Models.Village.Tests --force
+dotnet new global.json -o Api.Services.Village.Tests --force
+dotnet new global.json -o Api.Web.Village.Tests --force
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

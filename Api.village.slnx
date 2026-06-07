@@ -1,0 +1,9 @@
+<Solution>
+  <Project Path="Api.Helpers.Tests/Api.Helpers.Tests.csproj" />
+  <Project Path="Api.Helpers/Api.Helpers.csproj" />
+  <Project Path="Api.Models.Village/Api.Models.Village.csproj" />
+  <Project Path="Api.Services.Village.Tests/Api.Services.Village.Tests.csproj" />
+  <Project Path="Api.Services.Village/Api.Services.Village.csproj" />
+  <Project Path="Api.Web.Village.Tests/Api.Web.Village.Tests.csproj" />
+  <Project Path="Api.Web.Village/Api.Web.Village.csproj" />
+</Solution>

@@ -1,0 +1,13 @@
+md Api.Web.Village.Test
+cd Api.Web.Village.Test
+
+//建立測試專案
+dotnet new nunit
+
+//加入測試專案的來源
+dotnet add Api.Web.Village.Test.csproj reference ..\Api.Web.Village\Api.Web.Village.csproj
+
+// 進行測試
+dotnet test
+
+

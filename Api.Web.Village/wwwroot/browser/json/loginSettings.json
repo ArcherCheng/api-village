@@ -1,0 +1,13 @@
+{
+  "companyName": "新軟資訊企業社",
+  "systemName": "月老越好男女交友聯誼系統",
+  "loginTitle": "用戶登入作業",
+  "registerTitle": "用戶註冊作業",
+  "forgotPasswordTitle": "用戶忘記密碼作業",
+  "changePasswordTitle": "用戶變更密碼作業",
+  "userDataTitle":"用戶資料查詢作業",
+  "canRegister": true,
+  "canForgetPassword": true,
+  "copyRight":"新軟資訊企業社@版權所有 V7.16",
+  "serviceTel":"服務電話：0970922888，03-3013566"
+}

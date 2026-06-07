@@ -1,0 +1,29 @@
+
+/* create a new class project */
+dotnet new classlib -n Api.Models.Village
+
+cd Api.Models.Village
+
+/* add git gitignore */
+dotnet new gitignore
+
+/* add version file global.jaon */
+dotnet new global.json
+
+/* add package to project */
+dotnet package add Microsoft.EntityFrameworkCore
+dotnet package add Microsoft.EntityFrameworkCore.Tools
+dotnet package add Microsoft.EntityFrameworkCore.Design
+dotnet package add Microsoft.EntityFrameworkCore.SqlServer
+dotnet package add Microsoft.EntityFrameworkCore.Analyzers
+
+/* add reference class library project */
+/* 加入參考程式庫的來源專案 */
+dotnet add reference ..\Api.Helpers\Api.Helpers.csproj
+
+dotnet build
+
+
+dotnet tool update --global dotnet-ef
+
+dotnet ef dbContext scaffold "server=(local)\SqlExpress01;database=VillageModel;Trusted_Connection=True;TrustServerCertificate=true;" Microsoft.EntityFrameWorkCore.SqlServer -c "AppDbContext" -o Models -n Api.Models --force --use-database-names --no-pluralize

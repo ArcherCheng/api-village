@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace Api.Models;
+
+public partial class Pb2ForumReply: BaseEntity, IBaseEntity
+{
+    // public int GetId()
+    // {
+    //     return this.Id;
+    // }
+
+    public override string GetKeyType()
+    {
+        return "guid";
+    }
+}
